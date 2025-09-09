@@ -1,0 +1,1 @@
+Write a function that returns the string str with the uppercased first character, for instance
