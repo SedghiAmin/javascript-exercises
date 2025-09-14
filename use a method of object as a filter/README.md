@@ -1,0 +1,1 @@
+here we use a method of army object as a filter for person array.
