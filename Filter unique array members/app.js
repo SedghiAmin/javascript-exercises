@@ -1,14 +1,5 @@
 function unique(arr) {
-    let output = new Set();
-
-    for(let item of arr){
-        /* if(!output.includes(item)){
-            output.push(item);
-        } */
-      output.add(item);
-    }
-
-  return output;
+    return Array.from(new Set(arr));
 }
 
 let strings = ["Hare", "Krishna", "Hare", "Krishna",
