@@ -4,5 +4,5 @@ function getWeekDay(date) {
   return days[date.getDay()];
 }
 
-let date = new Date(2014, 0, 3); // 3 Jan 2014
+let date = new Date(2025, 8, 24); // 3 Jan 2014
 alert( getWeekDay(date) ); // FR
