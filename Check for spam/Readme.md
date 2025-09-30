@@ -1,1 +1,0 @@
-Write a function that checks your note. If note contains 'porn' or 'sex', return a notice.
