@@ -4,36 +4,44 @@ let worker = {
         return x / 2;
     },
 
-    multiple(y){
+    multiple(y , z){
         // there can be a heavy CPU-intensive job here
-        return y * this.slow(y);
+        return y * this.slow(z);
     },
 };
 
-function cachingDecorator(func){
+function cachingDecorator(func, hash){
     
     let cache = new Map();
 
-    return function(x) {    //you shouldnt use arrow function
+    return function() {    //you shouldn't use arrow function
 
-        if(cache.has(x)){
-            
-            return cache.get(x);
+        let key = hash(arguments);
+
+        if(cache.has(key)){
+
+            alert("read from cash");
+            return cache.get(key);
         }
 
-        let result = func.call(this, x);
+        let result = func.call(this, ...arguments);
 
-        cache.set(x, result);
+        cache.set(key, result);
 
         return result;
     }
 
 }
 
+function hash(arg){
+
+    return arg[0] + "," + arg[1];
+}
+
 let obj = worker;
 
-obj.multiple = cachingDecorator(obj.multiple);
+obj.multiple = cachingDecorator(obj.multiple , hash);
 
-alert( obj.multiple(6) ); //obj.multiple(6) is cached and the result returned 18
+alert( obj.multiple(6, 8) ); //obj.multiple(6, 8) is cached and the result returned 24
 
-alert( obj.multiple(6) ); //obj.multiple(6) returned from cache
+alert( obj.multiple(6, 8) ); //obj.multiple(6, 8) returned from cache
