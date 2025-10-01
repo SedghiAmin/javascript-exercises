@@ -1,30 +1,39 @@
-function slow(x){
-    // there can be a heavy CPU-intensive job here
-    return x ** 2;
-}
+let worker = {
+
+    slow(x){
+        return x / 2;
+    },
+
+    multiple(y){
+        // there can be a heavy CPU-intensive job here
+        return y * this.slow(y);
+    },
+};
 
 function cachingDecorator(func){
     
     let cache = new Map();
 
-    return (x) => {
+    return function(x) {    //you shouldnt use arrow function
 
         if(cache.has(x)){
             
             return cache.get(x);
         }
 
-        let resualt = func(x);
+        let result = func.call(this, x);
 
-        cache.set(x, resualt);
+        cache.set(x, result);
 
-        return resualt;
+        return result;
     }
 
 }
 
-slow = cachingDecorator(slow);
+let obj = worker;
 
-alert(slow(5)); //slow(5) is cached and the result returned
+obj.multiple = cachingDecorator(obj.multiple);
 
-alert(slow(5)); //result returned from cache
+alert( obj.multiple(6) ); //obj.multiple(6) is cached and the result returned 18
+
+alert( obj.multiple(6) ); //obj.multiple(6) returned from cache
