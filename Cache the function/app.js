@@ -4,9 +4,9 @@ let worker = {
         return x / 2;
     },
 
-    multiple(...arg){
+    multiple(x , y){
         // there can be a heavy CPU-intensive job here
-        return arg[0] * this.slow(arg[1]);
+        return x * this.slow(y);
     },
 };
 
@@ -33,9 +33,9 @@ function cachingDecorator(func, hash){
 
 }
 
-function hash(...arg){
-
-    return arg[0] + "," + arg[1];
+function hash(arg){
+    
+    return [].join.call(arg);
 }
 
 let obj = worker;
