@@ -14,9 +14,9 @@ function cachingDecorator(func, hash){
     
     let cache = new Map();
 
-    return function() {    //you shouldn't use arrow function
+    return function(...arg) {    //you shouldn't use arrow function
 
-        let key = hash(arguments);
+        let key = hash(arg);
 
         if(cache.has(key)){
 
@@ -33,8 +33,8 @@ function cachingDecorator(func, hash){
 
 }
 
-function hash(arg){
-    
+function hash(...arg){
+
     return [].join.call(arg);
 }
 
