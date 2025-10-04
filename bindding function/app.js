@@ -1,10 +1,15 @@
 let user = {
-  firstName: "John"
+  firstName: "John",
+  say(phrase) {
+    alert(`${phrase}, ${this.firstName}!`);
+  }
 };
 
-function func() {
-  alert(this.firstName);
-}
+for (let key in user) {
+  if (typeof user[key] == 'function') {
+    user[key] = user[key].bind(user);
+  }
+};
 
-let funcUser = func.bind(user);
-funcUser(); // John
+user.say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+user.say("Bye"); // Bye, John! ("Bye" is passed to say)
