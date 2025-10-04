@@ -1,10 +1,10 @@
 let user = {
-  firstName: "John",
-  sayHi() {
-    alert(`Hello, ${this.firstName}!`);
-  }
+  firstName: "John"
 };
 
-setTimeout(function() {
-  user.sayHi(); // Hello, John!
-}, 1000);
+function func() {
+  alert(this.firstName);
+}
+
+let funcUser = func.bind(user);
+funcUser(); // John
