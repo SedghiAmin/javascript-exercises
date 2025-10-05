@@ -15,7 +15,7 @@ Object.defineProperty(user, "fullName", {
             alert("Name is too short...");
             return;
         }
-        [this._firstName, this._lastName] = value.split(" ");
+        [this._firstName, this._lastName] = arr;
     },
 });
 
