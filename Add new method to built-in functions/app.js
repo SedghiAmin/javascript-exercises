@@ -1,14 +1,19 @@
-if (!Function.prototype.defar){
-    Function.prototype.defar = function(ms){
-        let f = this;
-        return function(...args){
-            setTimeout(() => f.apply(this, args), ms);
-        }
-    }
+Function.prototype.defer = function(ms) {
+  let f = this;
+  return function(...args) {
+    setTimeout(() => f.apply(this, args), ms);
+  }
 };
 
-function f(a , b){
-    alert( a + b );
-};
+let user = {
+  name: "John",
+  sayHi() {
+    alert(this.name);
+  }
+}
 
-f.defar(2000)(3, 2);
+user.sayHi = user.sayHi.defer(1000);
+
+user.sayHi();
+
+
