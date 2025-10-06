@@ -1,7 +1,7 @@
 if (!String.prototype.repeat){
     
     String.prototype.repeat = function(n){
-        return Array(n).join(this);
+        Array(n).join(this);
     }
 }
 
