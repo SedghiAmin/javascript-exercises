@@ -1,6 +1,6 @@
 class Clock{
-    constructor({template}){
-        this.template = template;
+    constructor(options){
+        this.template = options.template;
     }
 
     render(){
@@ -15,10 +15,15 @@ class Clock{
         let seconds = date.getSeconds();
         if (seconds < 10) seconds = '0' + seconds;
 
+        let time = this.template.split(":");
+        let h = time[0];
+        let m = time[1];
+        let s = time[2];
+
         let output = this.template
-            .replace("hh", hours)
-            .replace("mm", minutes)
-            .replace("ss", seconds);
+            .replace(h, hours)
+            .replace(m, minutes)
+            .replace(s, seconds);
         
         console.log(output);
     }
@@ -29,5 +34,25 @@ class Clock{
     }
 }
 
-let clock = new Clock({template: "hh:mm:ss"});
-clock.start();
+class ExtendedClock extends Clock{
+    
+    constructor(options){
+        super(options);
+        let {delay = 10000} = options;
+        this.delay = delay;
+    }
+
+    start(){
+        this.render();
+        this.timer = setInterval(() => this.render(), this.delay);
+    }
+}
+
+let options ={
+      template: 'h:m:s',
+      delay: 5000,
+    };
+
+let lowResolutionClock = new ExtendedClock(options);
+
+lowResolutionClock.start();
