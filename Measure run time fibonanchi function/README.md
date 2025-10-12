@@ -1,0 +1,1 @@
+You can check by running the code with entering 34 into prompt – it executes normally, finally after try. And then enter -1 – there will be an immediate error, and the execution will take 0ms. Both measurements are done correctly.
