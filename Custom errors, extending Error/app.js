@@ -1,7 +1,14 @@
-class ValidationError extends Error{
+class MyError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
+class ValidationError extends MyError{
     constructor(message){
         super(message);
-        this.name = "ValidationError";
+        //this.name = "ValidationError";
     };
 }
 
@@ -21,9 +28,9 @@ try{
     readUser(user);
 }catch(err){
     if (err instanceof ValidationError){
-        alert("Invalid data: " + err.message);
+        alert(err.name + ": " + err.message);
     }else if (err instanceof SyntaxError){
-        alert("Syntax Error: "+ err.message);
+        alert(err.name + ": " + err.message);
     }else {
     throw err; // unknown error, rethrow it (caused by a typo in the code or other unknown reasons)
   }
