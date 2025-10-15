@@ -1,0 +1,2 @@
+We’ve got the loadScript function for loading a script from the previous chapter.
+function loadScript will create and return a Promise object that resolves when the loading is complete. The outer code can add handlers to it using .then
